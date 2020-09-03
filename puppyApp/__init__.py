@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-#db = SQLAlchemy()
+db = SQLAlchemy()
 
 def create_app():
     """Initialize the core application"""
@@ -9,6 +9,6 @@ def create_app():
     app.config.from_object('config.DevConfig')
 
     # Initialize Plugins
-    #db.init_app(app)
+    db.init_app(app)
 
     return app
