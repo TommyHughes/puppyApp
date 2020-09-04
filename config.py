@@ -23,5 +23,5 @@ class DevConfig(Config):
     FLASK_ENV = 'development'
     DEBUG = True
     TESTING = True
-    SQL_ALCHEMY_DATABASE_URI = "sqlite///" + os.path.join(basedir,'app.db')
-    SQL_ALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + path.join(basedir,"app.db")
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

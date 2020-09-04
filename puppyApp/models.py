@@ -3,9 +3,8 @@ from puppyApp import db
 class Puppy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    owner = db.Column(db.Integer, db.ForeignKey('owner.id'), nullable=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('owner.id'), nullable=True)
     toy = db.relationship('Toy', backref='puppy', lazy='dynamic')
-    owner = db.relationship('Owner', backref='puppy', uselist=False)
 
     def __repr__(self):
         return f"Puppy({self.id},'{self.name}')"
@@ -13,6 +12,7 @@ class Puppy(db.Model):
 class Owner(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+    puppy = db.relationship('Puppy', backref='owner', lazy='dynamic')
 
     def __repr__(self):
         return f"Owner({self.id},'{self.name}')"
