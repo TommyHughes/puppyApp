@@ -4,20 +4,23 @@ class Puppy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     owner = db.Column(db.Integer, db.ForeignKey('owner.id'), nullable=True)
+    toy = db.relationship('Toy', backref='puppy', lazy='dynamic')
+    owner = db.relationship('Owner', backref='puppy', uselist=False)
 
     def __repr__(self):
-        return f"Puppy('{self.id}','{self.name}')"
+        return f"Puppy({self.id},'{self.name}')"
 
 class Owner(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
-        return f"Owner('{self.id}','{self.name}')"
+        return f"Owner({self.id},'{self.name}')"
 
 class Toy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(50), nullable=False)
+    puppy_id = db.Column(db.Integer, db.ForeignKey('puppy.id'))
 
     def __repr__(self):
-        return f"Toy('{self.id}','{self.type}')"
+        return f"Toy({self.id},'{self.type}',{self.puppy_id})"

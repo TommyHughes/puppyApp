@@ -7,7 +7,7 @@ load_dotenv(path.join(basedir,'.env'))
 
 class Config:
     """Base config."""
-    SECRET_KEY = environ.get('SECRET_KEY')
+    SECRET_KEY = environ.get('SECRET_KEY') or '123'
     STATIC_FOLDER = 'static'
     TEMPLATES_FOLDER = 'templates'
     
@@ -23,4 +23,5 @@ class DevConfig(Config):
     FLASK_ENV = 'development'
     DEBUG = True
     TESTING = True
-    DATABASE_URI = environ.get('DEV_DATABASE_URI')
+    SQL_ALCHEMY_DATABASE_URI = "sqlite///" + os.path.join(basedir,'app.db')
+    SQL_ALCHEMY_TRACK_MODIFICATIONS = False
