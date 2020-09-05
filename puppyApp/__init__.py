@@ -16,6 +16,16 @@ def create_app(config_class='DevConfig'):
     db.init_app(app)
     migrate.init_app(app, db)
 
+    # Register Blueprints
+    from puppyApp.owners import bp as owners_bp
+    app.register_blueprint(owners_bp, url_prefix='/owners')
+
+    from puppyApp.puppies import bp as puppies_bp
+    app.register_blueprint(puppies_bp, url_prefix='/puppies')
+
+    from puppyApp.main import bp as main_bp
+    app.register_blueprint(main_bp)
+
     return app
 
 from puppyApp import models
